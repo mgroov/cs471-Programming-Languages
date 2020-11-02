@@ -1,4 +1,4 @@
-package cs472;
+
 
 //Matthew Groover
 //11/02/20
@@ -10,11 +10,12 @@ import java.io.BufferedReader;  // the libraries necessary
 import java.io.BufferedWriter;  // for file management 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 public class removespecial {
 	
 	public static void main(String args[]) {
-		new removespecial("potato");
+		new removespecial("control-char.txt");
 	}//of main
 	
 	
@@ -32,27 +33,29 @@ public class removespecial {
 				
 				file.createNewFile();  //checks to make sure that the target file
 									   //exists
-			}//of if 
+			}//of if
+
+			FileWriter fw = new FileWriter(file);
+			bw = new BufferedWriter(fw);
 			
 			String temp =" ";
 			String temp2 =" ";
-			
+
+			System.out.println("starting to write");
 			while((temp = br.readLine())!= null) {
 				
-				temp2 = temp2 +fixline(temp); //goes through and fixes each
-											  //line then adds to the final 
-				 							  // file string
+				temp2 = fixline(temp); //goes through and fixes each
+				bw.append(temp2);	 //line then adds to the final 
+				 			 // file 
 			}//of fix and add lines while the original file has content
 			
-			System.out.println("Beggining write... /n");
-			bw.write(temp2);
 			System.out.println("...write complete");
 			bw.close();
 			
 		}//of try to read the file
 		catch(Exception e) {
-			System.out.println("Error in reading file ");
-		}//of if file is not read or exception is thrown
+			System.out.println("Error in reading or writing to file");
+		}//of if file is not read or able to be written to exception is thrown
 	}//of remove special call
 	
 	//this method takes in a string supposedly with special characters
