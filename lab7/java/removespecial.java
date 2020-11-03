@@ -38,16 +38,24 @@ public class removespecial {
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 			
-			String temp =" ";
+			int temp;
 			String temp2 =" ";
+			boolean flag = true;
 
 			System.out.println("starting to write");
-			while((temp = br.readLine())!= null) {
-				
-				temp2 = fixline(temp); //goes through and fixes each
-				bw.append(temp2);	 //line then adds to the final 
-				 			 // file 
-			}//of fix and add lines while the original file has content
+			while((temp = br.read()) != -1) {
+
+				if(temp == 3){
+					flag = false;
+				    }//if control c
+				if(flag){                //goes through char by char
+				    bw.write(temp);	 //updates the flag if need be 
+				} //of flag check        // then writes or doesnt based on the flag
+				if(temp ==2){
+				    flag = true;
+
+				}//of if control b
+			}//of while char != EOF
 			
 			System.out.println("...write complete");
 			bw.close();
@@ -57,15 +65,5 @@ public class removespecial {
 			System.out.println("Error in reading or writing to file");
 		}//of if file is not read or able to be written to exception is thrown
 	}//of remove special call
-	
-	//this method takes in a string supposedly with special characters
-	//using regular expressions it replaces the special 
-	//it then returns the edited string 
-	public String fixline(String str) { 
-		
-		str = str.replaceAll("[^a-zA-Z0-9]", " ");  
-		return str;
-		
-	}//of fixline method
 	
 }//of remove special class

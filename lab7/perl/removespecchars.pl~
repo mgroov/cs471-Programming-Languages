@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+
+use warnings;
+
+
+#Matthew Groover
+#11/02/20
+#this program removes special chars in the text
+#file and returns the modified strings into a new file 
+
+my $filename = './control-char.txt';
+
+open(FILE,'<', $filename) or die $!;
+open(FH,'>','./new-text.txt')or die $!;
+
+my $char;
+my $read;
+my $poggers =1;
+while ($read = read FILE, $char, 1) {
+    
+    if(ord($char)==3){
+       $poggers =0;
+    }
+    if($poggers){
+	print FH $char;
+    }
+    if(ord($char)=='2'){
+	$poggers =1;
+    }
+} 
+die "read error: $!" if not defined $read;
+close(FILE);
+close(FH);
