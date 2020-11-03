@@ -4,7 +4,7 @@
 //11/02/20
 //The purpose of this is program is to remove 
 //special characters from a text file 
-
+//in between specific charachters
 import java.util.*;
 import java.io.BufferedReader;  // the libraries necessary 
 import java.io.BufferedWriter;  // for file management 
